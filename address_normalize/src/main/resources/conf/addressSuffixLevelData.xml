@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<address>
+    <!--level指的是地址元素对应的级别；use表示是否取这个值，如果为true，则取，否则，不取-->
+    <level number="A" use="false">
+        <!--suffix指的是地址元素的地址后缀-->
+        <suffix use="false">省</suffix>
+        <suffix use="false">自治区</suffix>
+        <suffix use="false">直辖市</suffix>
+    </level>
+    <level number="B" use="false">
+        <suffix use="false">市</suffix>
+        <suffix use="false">自治州</suffix>
+        <suffix use="false">州</suffix>
+    </level>
+    <level number="C" use="false">
+        <suffix use="false">区</suffix>
+        <!--<suffix use="false">自治区</suffix>-->
+        <suffix use="false">县</suffix>
+        <suffix use="false">自治县</suffix>
+        <suffix use="false">新区</suffix>
+    </level>
+    <level number="D" use="false">
+        <suffix use="false">乡</suffix>
+        <suffix use="false">镇</suffix>
+        <suffix use="false">街道</suffix>
+        <suffix use="false">街道办</suffix>
+    </level>
+    <level number="E" use="true">
+        <suffix use="true">村</suffix>
+        <suffix use="true">屯</suffix>
+        <!--<suffix use="true">新村</suffix>-->
+        <suffix use="true">社区</suffix>
+    </level>
+    <level number="F" use="true">
+        <suffix use="true">路</suffix>
+        <suffix use="true">街</suffix>
+        <suffix use="true">巷</suffix>
+        <suffix use="true">大街</suffix>
+        <suffix use="true">大道</suffix>
+        <suffix use="true">公路</suffix>
+        <suffix use="true">高速公路</suffix>
+        <suffix use="true">国道</suffix>
+    </level>
+    <level number="G" use="true">
+        <suffix use="true">号</suffix>
+    </level>
+    <level number="H" use="true">
+        <!--<suffix use="true">区</suffix>
+        <suffix use="true">座</suffix>
+        <suffix use="true">苑</suffix>
+        <suffix use="true">坊</suffix>
+        <suffix use="true">园</suffix>
+        <suffix use="true">家园</suffix>
+        <suffix use="true">工业区</suffix>
+        <suffix use="true">开发区</suffix>-->
+        <suffix use="true">小区</suffix>
+        <suffix use="true">大厦</suffix>
+        <suffix use="true">广场</suffix>
+        <suffix use="true">大楼</suffix>
+        <suffix use="true">公司</suffix>
+        <suffix use="true">饭店</suffix>
+        <suffix use="true">公寓</suffix>
+        <suffix use="true">酒店</suffix>
+        <suffix use="true">工业园</suffix>
+        <suffix use="true">科技园</suffix>
+        <suffix use="true">创业园</suffix>
+        <suffix use="true">产业园</suffix>
+        <suffix use="true">村委会</suffix>
+    </level>
+    <!-- <level  number="I" use="true">
+         <suffix use="true">区</suffix>
+         <suffix use="true">座</suffix>
+         <suffix use="true">苑</suffix>
+         <suffix use="true">坊</suffix>
+         <suffix use="true">园</suffix>
+     </level> -->
+    <level number="J" use="true">
+        <suffix use="true">栋</suffix>
+        <suffix use="true">幢</suffix>
+        <suffix use="true">号楼</suffix>
+    </level>
+    <level number="K" use="true">
+        <suffix use="true">单元</suffix>
+    </level>
+    <level number="L" use="true">
+        <suffix use="true">楼</suffix>
+        <suffix use="true">层</suffix>
+    </level>
+    <level number="M" use="true">
+        <suffix use="true">室</suffix>
+        <suffix use="true">舍</suffix>
+        <suffix use="true">房</suffix>
+    </level>
+</address>

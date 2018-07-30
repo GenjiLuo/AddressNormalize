@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model>
+    <!--states描述了当前模型中包含的各种状态。id表示状态唯一代号，不能够重复；name表示状态名称；isTerminated表示该状态是否是可总结的-->
+    <states>
+        <state id="root" name="中国"/>
+        <state id="L1" name="省"/>
+        <state id="L2" name="市"/>
+        <state id="L3" name="区"/>
+        <state id="L4" name="街道"/>
+        <state id="L5" name="社区"/>
+        <state id="L6" name="路"/>
+        <state id="L7" name="号" isTerminated="true"/>
+        <state id="L8" name="小区"/>
+        <state id="L9" name="楼栋"/>
+        <state id="L10" name="单元"/>
+        <state id="L11" name="楼层"/>
+        <state id="L12" name="室" isTerminated="true"/>
+    </states>
+
+    <!--transitions描述了各个状态之间如何转移。from表示当前状态；to表示转移后的状态；
+    when表示如何或者什么时候转移，目前表示对应等级元素存在时-->
+    <transitions>
+        <transition from="root" to="L1" when="A"/>
+        <transition from="L1" to="L2" when="B"/>
+        <transition from="L2" to="L3" when="C"/>
+        <transition from="L2" to="L4" when="D"/>
+        <transition from="L2" to="L6" when="F"/>
+        <transition from="L3" to="L4" when="D"/>
+        <transition from="L3" to="L5" when="E"/>
+        <transition from="L3" to="L6" when="F"/>
+        <transition from="L3" to="L8" when="H"/>
+        <transition from="L4" to="L5" when="E"/>
+        <transition from="L4" to="L6" when="F"/>
+        <transition from="L4" to="L8" when="H"/>
+        <transition from="L5" to="L6" when="F"/>
+        <transition from="L5" to="L7" when="G"/>
+        <transition from="L5" to="L8" when="H"/>
+        <transition from="L6" to="L7" when="G"/>
+        <transition from="L6" to="L8" when="H"/>
+        <transition from="L7" to="L8" when="H"/>
+        <transition from="L7" to="L9" when="J"/>
+        <transition from="L8" to="L9" when="J"/>
+        <transition from="L8" to="L12" when="M"/>
+        <transition from="L9" to="L10" when="K"/>
+        <transition from="L9" to="L11" when="L"/>
+        <transition from="L9" to="L12" when="M"/>
+        <transition from="L10" to="L11" when="L"/>
+        <transition from="L10" to="L12" when="M"/>
+        <transition from="L11" to="L12" when="M"/>
+    </transitions>
+</model>

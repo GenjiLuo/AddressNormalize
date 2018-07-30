@@ -1,0 +1,13 @@
+大街:0:1300000:SuffixStreet
+环:0:1300000:SuffixStreet
+段:0:1300000:SuffixStreet
+胡同:0:1300000:SuffixStreet
+公路:0:1200000:SuffixStreet
+路:0:1200000:SuffixStreet
+大道:0:200:SuffixStreet
+道:0:200:SuffixStreet
+街:0:200:SuffixStreet
+巷:0:200:SuffixStreet
+国道:0:200:SuffixStreet
+路口:0:200:SuffixStreet
+条:0:200:SuffixStreet

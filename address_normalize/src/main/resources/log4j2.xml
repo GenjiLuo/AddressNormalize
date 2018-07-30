@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- status : 指定log4j本身的打印日志的级别
+    .ALL< Trace < DEBUG < INFO < WARN < ERROR < FATAL < OFF.
+    monitorInterval : 用于指定log4j自动重新配置的监测间隔时间，单位是s,最小是5s. -->
+<Configuration status="WARN">
+    <Properties>
+        <!--配置日志文件的目录-->
+        <property name="PROJECT_HOME">./src/main/resources</property>
+        <property name="LOG_HOME">${PROJECT_HOME}/logs</property>
+    </Properties>
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss} %-5level %logger{36}[%L] - %msg%n "/>
+        </Console>
+
+        <!--文件输出模式-->
+        <File name="FileDebug" fileName="${LOG_HOME}/debug.log" append="false">
+            <ThresholdFilter level="debug" onMatch="ACCEPT"
+                             onMismatch="DENY"/>
+            <PatternLayout>
+                <!--<pattern>%d %p %C{1.} [%t] %m%n</pattern>-->
+                <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36}[%L] - %msg%n</pattern>
+            </PatternLayout>
+        </File>
+        <!--文件滚动输出模式-->
+        <RollingFile name="RollingFileInfo" fileName="${LOG_HOME}/info.log"
+                     filePattern="${LOG_HOME}/info/$${date:yyyy-MM-dd}/info-%d{yyyy-MM-dd}-%i.log">
+            <!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch） -->
+            <ThresholdFilter level="info" onMatch="ACCEPT"
+                             onMismatch="DENY"/>
+            <PatternLayout
+                    pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36}[%L] - %msg%n"/>
+            <Policies>
+                <!-- 基于时间的滚动策略，interval属性用来指定多久滚动一次，默认是1 hour。 modulate=true用来调整时间：比如现在是早上3am，interval是4，那么第一次滚动是在4am，接着是8am，12am...而不是7am. -->
+                <!-- 关键点在于 filePattern后的日期格式，以及TimeBasedTriggeringPolicy的interval， 日期格式精确到哪一位，interval也精确到哪一个单位 -->
+                <!-- log4j2的按天分日志文件 : info-%d{yyyy-MM-dd}-%i.log -->
+                <TimeBasedTriggeringPolicy interval="1"
+                                           modulate="true"/>
+                <!-- SizeBasedTriggeringPolicy:Policies子节点， 基于指定文件大小的滚动策略，size属性用来定义每个日志文件的大小. -->
+                <!-- <SizeBasedTriggeringPolicy size="2 kB" /> -->
+            </Policies>
+        </RollingFile>
+
+        <RollingFile name="RollingFileWarn" fileName="${LOG_HOME}/warn.log"
+                     filePattern="${LOG_HOME}/warn/$${date:yyyy-MM-dd}/warn-%d{yyyy-MM-dd}-%i.log">
+            <ThresholdFilter level="warn" onMatch="ACCEPT"
+                             onMismatch="DENY"/>
+            <PatternLayout
+                    pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36}[%L] - %msg%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1"
+                                           modulate="true"/>
+                <SizeBasedTriggeringPolicy size="1024 kB"/>
+            </Policies>
+            <!-- DefaultRolloverStrategy属性如不设置，则默认为最多同一文件夹下7个文件，这里设置了20 -->
+            <DefaultRolloverStrategy max="20"/>
+        </RollingFile>
+
+        <RollingFile name="RollingFileError" fileName="${LOG_HOME}/error.log"
+                     filePattern="${LOG_HOME}/error/$${date:yyyy-MM-dd}/error-%d{yyyy-MM-dd-HH-mm}-%i.log">
+            <ThresholdFilter level="error" onMatch="ACCEPT"
+                             onMismatch="DENY"/>
+            <PatternLayout
+                    pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36}[%L]- %msg%n"/>
+            <Policies>
+                <!-- log4j2的按分钟分日志文件 24*60 : warn-%d{yyyy-MM-dd-HH-mm}-%i.log -->
+                <TimeBasedTriggeringPolicy interval="1440"
+                                           modulate="true"/>
+                <SizeBasedTriggeringPolicy size="10 MB"/>
+            </Policies>
+        </RollingFile>
+
+    </Appenders>
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref="Console"/>
+        </Root>
+        <Logger name="NormalizeTestAll" level="info">
+            <AppenderRef ref="RollingFileError"/>
+            <AppenderRef ref="RollingFileWarn"/>
+            <AppenderRef ref="RollingFileInfo"/>
+            <AppenderRef ref="FileDebug"/>
+        </Logger>
+    </Loggers>
+</Configuration>

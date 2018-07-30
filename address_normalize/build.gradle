@@ -1,0 +1,47 @@
+apply plugin: 'maven-publish'
+apply plugin: 'java'
+
+version = "$major.$minor.$patch${Boolean.valueOf(release) ? '' : '-SNAPSHOT'}"
+description = "地址规范化模块"
+
+dependencies {
+    compile 'dom4j:dom4j:1.6.1'
+    compile group: 'com.alibaba', name: 'fastjson', version: '1.2.47'
+    compile 'org.apache.lucene:lucene-core:3.0.2'
+    compile 'org.apache.logging.log4j:log4j-core:2.11.0'
+    compile 'org.apache.logging.log4j:log4j-api:2.11.0'
+    compile 'org.apache.poi:poi:3.16'
+    compile group: 'org.apache.commons', name: 'commons-collections4', version: '4.0'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+
+repositories {
+    mavenLocal()
+    maven {
+        url "http://maven.aliyun.com/nexus/content/groups/public"
+    }
+}
+
+
+
+[compileJava, compileTestJava]*.options*.encoding = "UTF-8"
+
+compileJava {
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+}
+
+task buildMyJar(type: Jar,dependsOn: ['jar']) {
+    //导出的jar文件名称
+    archiveName = 'address_normalizer-2.0.0.jar'
+    //从哪个目录打包jar
+    from('build/classes/main')
+    from('build/resources/main')
+    //导出的jar文件的存放目录（未指定则默认存放在build/libs下）
+    destinationDir = file('build/libs')
+    //需要打包的类。
+    include('unkown.txt')
+    include('small/*.txt')
+    include('com/fiberhome/daml/address/normalizer/**/*.class')
+}
